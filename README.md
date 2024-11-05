@@ -1,4 +1,4 @@
-![](https://imgur.com/a/NfxkeY9)
+![](https://i.imgur.com/QxYmkm4.gif)
 ## Background
 This website displays Pittsburgh historic landmarks on a map and provides generated descriptions of them.
 
