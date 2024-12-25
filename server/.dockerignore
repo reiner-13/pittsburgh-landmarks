@@ -1,0 +1,5 @@
+/node_modules
+/container
+/.env
+/.git
+/npm-debug.log
