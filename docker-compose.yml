@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:17.0
+    container_name: landmarks_container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: reinerj21
+      POSTGRES_DB: landmarks
+    volumes:
+      - ./server/container/db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./server
+    container_name: landmarks_backend
+    ports:
+      - "4000:4000"
+    depends_on:
+      - postgres
+    env_file:
+      - ./server/.env
+
+  frontend:
+    build: ./client
+    container_name: landmarks_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
