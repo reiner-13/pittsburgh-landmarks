@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import LandmarkFinder from '../apis/LandmarkFinder';
 
 const LandmarkInfo = ({ landmarkName }) => {
+    // States to hold landmark ID and landmark description
     const [landmarkId, setLandmarkId] = useState(null);
     const [landmarkInfo, setLandmarkInfo] = useState(null);
+
+    // Gets landmark ID from backend using landmark name
     useEffect(() => {
         const getLandmarkId = async () => {
             console.log(landmarkName);
@@ -23,6 +26,7 @@ const LandmarkInfo = ({ landmarkName }) => {
         
     }, [landmarkName]);
 
+    // Gets landmark description from backend using landmark ID
     useEffect(() => {
         const getLandmarkInfo = async () => {
             try {
@@ -41,6 +45,8 @@ const LandmarkInfo = ({ landmarkName }) => {
         
     }, [landmarkId]);
 
+    // If it generated a description, it will populate the description box
+    // Otherwise, it displays default text
     return (
         <div className="col-4 mx-auto my-5 p-3 border border-dark border-5 bg-warning">
             {landmarkName ? (

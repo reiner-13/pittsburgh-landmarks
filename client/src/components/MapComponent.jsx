@@ -14,10 +14,13 @@ import LandmarkInfo from './LandmarkInfo';
 import LandmarkFinder from '../apis/LandmarkFinder';
 
 const MapComponent = () => {
+    // Create map ref
+    // Create markers and selected landmark states
     const map = useRef(null);
     const [markers, setMarkers] = useState([]);
     const [selectedLandmark, setSelectedLandmark] = useState(null);
 
+    // Create OpenLayers map
     useEffect(() => {
         if (!map.current) {
             // OSM layer
@@ -51,6 +54,9 @@ const MapComponent = () => {
         }
     }, []);
     
+    // Get landmark information from backend
+    // Push latitude, longitude, and name to geocodedMarkers array
+    // Set markers state equal to geocodedMarkers
     useEffect(() => {
         const fetchAddresses = async() => {
             try {
@@ -72,7 +78,7 @@ const MapComponent = () => {
         fetchAddresses();
     }, []);
     
-    
+    // Place markers on OpenLayers map and style them
     useEffect(() => {
         if (map.current && markers.length > 0) {
             const vectorSource = new VectorSource();
@@ -108,7 +114,7 @@ const MapComponent = () => {
             });
             map.current.addLayer(markerLayer);
 
-            
+            // If marker is selected, set selected landmark equal to the name of the marker
             map.current.on('click', (evt) => {
                 const feature = map.current.forEachFeatureAtPixel(evt.pixel, (feature) => {
                     return feature;
@@ -121,6 +127,8 @@ const MapComponent = () => {
             
         }
     }, [markers]);
+
+    // Return map component with landmark info
     return (
         <div className="row m-0">
             <div className="col-4 mx-auto my-5 p-0 border border-dark border-5" style={{ height: '700px', width: '700px'}} id="map"></div>

@@ -2,6 +2,7 @@ import React from 'react';
 
 const Header = () => {
     return (
+        // Return a navbar
         <nav className="navbar navbar-expand-lg bg-dark">
             <div className="container-fluid">
                 <span className="navbar-brand mb-0 h1 text-white">Pittsburgh Landmarks</span>

@@ -64,6 +64,7 @@ app.get("/api/v1/landmarks/:id/info", async (req, res) => {
         const landmarkName = results.rows[0].name;
         const modelName = 'llama-3.2-90b-vision-preview';
         const chatCompletion = await groqClient.chat.completions.create({
+            // The model generates HTML-formatted descriptions based on the prompt
             messages: [{ role: 'user', content: `Tell me about ${landmarkName} in Pittsburgh, PA. Narrow it down to 5 or fewer bullet points (<ul> and <li>) and do not responsd with fake/unsure facts. Format the response as HTML. Do not wrap everything in anchor. Start with a header (h1) as the name of the place.` }],
             model: modelName,
         });
